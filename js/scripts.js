@@ -15,25 +15,26 @@ PigDice.prototype.assignId = function() {
 };
 
 PigDice.prototype.newRoll = function(id) {
-  this.players[id].roll = 0;
   this.players[id].roll = roll();
-  console.log(pigDice.players[1].roll)
+  if (this.players[id].roll === 1) {
+    this.players[id].roll = 1;
+    this.players[id].turnTally = -1;
+    alert("LOSE YOUR TURN!!!")
+  }
 };
 
 PigDice.prototype.addRollToTurnTally = function(id) {
   this.players[id].turnTally = this.players[id].turnTally + this.players[id].roll;
+  if ((this.players[id].turnTally + this.players[id].totalScore) >= 100){
+    alert("Press hold you win!")
+  }
 };
 
 PigDice.prototype.addTurnTallyToTotal = function(id) {
   this.players[id].totalScore = this.players[id].totalScore + this.players[id].turnTally
 };
 
-PigDice.prototype.findPlayer = function(id) {
-  if (this.players[id] != undefined) {
-    return this.players[id]
-  }
-  return false;
-};
+
 
 // Player logic
 
@@ -56,6 +57,7 @@ pigDice.addPlayer(player1);
 pigDice.addPlayer(player2);
 
 function attachContactListeners() {
+  //Player1
   $("#player1-roll").on("click", function() {
     pigDice.newRoll(1);
     $("#p1-roll").html(pigDice.players[1].roll);
@@ -69,6 +71,21 @@ function attachContactListeners() {
     $("#p1-total-score").html(pigDice.players[1].totalScore)
     $("#p1-roll").html(pigDice.players[1].roll);
     $("#p1-turn-tally").html(pigDice.players[1].turnTally)
+  })
+  //Player2
+  $("#player2-roll").on("click", function() {
+    pigDice.newRoll(2);
+    $("#p2-roll").html(pigDice.players[2].roll);
+    pigDice.addRollToTurnTally(2);
+    $("#p2-turn-tally").html(pigDice.players[2].turnTally)
+  });
+  $("#player2-hold").on("click", function(){
+    pigDice.addTurnTallyToTotal(2);
+    pigDice.players[2].roll = 0;
+    pigDice.players[2].turnTally = 0;
+    $("#p2-total-score").html(pigDice.players[2].totalScore)
+    $("#p2-roll").html(pigDice.players[2].roll);
+    $("#p2-turn-tally").html(pigDice.players[2].turnTally)
   })
 }
 
