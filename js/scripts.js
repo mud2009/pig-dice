@@ -28,7 +28,7 @@ PigDice.prototype.addTurnTallyToTotal = function(id) {
   this.players[id].totalScore = this.players[id].totalScore + this.players[id].turnTally
 }
 
-PigDice.prototype
+// PigDice.prototype
 
 // Player logic
 
@@ -48,3 +48,22 @@ let player1 = new Player(1);
 let player2 = new Player(2);
 pigDice.addPlayer(player1);
 pigDice.addPlayer(player2);
+
+function displayRoll() {
+  $("#p1-roll").text(pigDice.players[1].roll);
+}
+
+// function displayTurnTally() {
+//   $("#p1-turn-tally")
+// }
+
+// function displayTotalScore() {
+// }
+
+
+$(document).ready(function() {
+  // $("form#new-contact").submit(function(event) {
+    // event.preventDefault();
+  displayRoll();
+    // });
+});
