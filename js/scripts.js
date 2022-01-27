@@ -15,18 +15,22 @@ PigDice.prototype.assignId = function() {
 };
 
 PigDice.prototype.newRoll = function(id) {
-  this.players[id].roll = roll();
-  if (this.players[id].roll === 1) {
-    this.players[id].roll = 1;
-    this.players[id].turnTally = -1;
-    alert("LOSE YOUR TURN!!!")
-  }
+  this.players[id].roll1 = roll();
+  this.players[id].roll2 = roll();
 };
 
 PigDice.prototype.addRollToTurnTally = function(id) {
-  this.players[id].turnTally = this.players[id].turnTally + this.players[id].roll;
+  this.players[id].turnTally = this.players[id].turnTally + this.players[id].roll1 + this.players[id].roll2;
+  if (this.players[id].roll1 === 1 && this.players[id].roll2 === 1) {
+    this.players[id].turnTally = 0;
+    this.players[id].totalScore = 0;
+    alert ("LOSE YOUR TURN & ALL POINTS");
+  } else if (this.players[id].roll1 === 1 || this.players[id].roll2 === 1) {
+    this.players[id].turnTally = 0;
+    alert ("LOSE YOUR TURN!!!");
+  }
   if ((this.players[id].turnTally + this.players[id].totalScore) >= 100){
-    alert("Press hold you win!")
+    alert("YOU WIN!")
   }
 };
 
@@ -38,7 +42,8 @@ PigDice.prototype.addTurnTallyToTotal = function(id) {
 // Player logic
 
 function Player() {
-  this.roll = 0;
+  this.roll1 = 0;
+  this.roll2 = 0;
   this.turnTally = 0;
   this.totalScore = 0;
 }
@@ -59,9 +64,11 @@ function attachContactListeners() {
   //Player1
   $("#player1-roll").on("click", function() {
     pigDice.newRoll(1);
-    $("#p1-roll").html(pigDice.players[1].roll);
+    $("#p1-roll").html(pigDice.players[1].roll1);
+    $("#p1-roll").append(", " + pigDice.players[1].roll2);
     pigDice.addRollToTurnTally(1);
-    $("#p1-turn-tally").html(pigDice.players[1].turnTally)
+    $("#p1-turn-tally").html(pigDice.players[1].turnTally);
+    $("#p1-total-score").html(pigDice.players[1].totalScore);
   });
   $("#player1-hold").on("click", function(){
     pigDice.addTurnTallyToTotal(1);
