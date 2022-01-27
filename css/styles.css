@@ -9,3 +9,23 @@
 h2{
   text-align: center;
 }
+
+h6{
+  text-align: center;
+}
+
+#p1-turn-tally{
+  font-size: 25px;
+}
+
+#p2-turn-tally{
+  font-size: 25px;
+}
+
+#p1-total-score{
+  font-size: 25px;
+}
+
+#p2-total-score{
+  font-size: 25px;
+}
