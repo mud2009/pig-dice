@@ -38,6 +38,11 @@ PigDice.prototype.addTurnTallyToTotal = function(id) {
   this.players[id].totalScore = this.players[id].totalScore + this.players[id].turnTally
 };
 
+function resetAll(obj, val) {
+  Object.keys(obj).forEach(function(index) {
+      obj[index] = val
+  });
+}
 
 // Player logic
 
@@ -81,18 +86,31 @@ function attachContactListeners() {
   //Player2
   $("#player2-roll").on("click", function() {
     pigDice.newRoll(2);
-    $("#p2-roll").html(pigDice.players[2].roll);
+    $("#p2-roll").html(pigDice.players[2].roll2);
+    $("#p2-roll").append(", " + pigDice.players[2].roll2);
     pigDice.addRollToTurnTally(2);
-    $("#p2-turn-tally").html(pigDice.players[2].turnTally)
+    $("#p2-turn-tally").html(pigDice.players[2].turnTally);
+    $("#p2-total-score").html(pigDice.players[2].totalScore);
   });
   $("#player2-hold").on("click", function(){
     pigDice.addTurnTallyToTotal(2);
     pigDice.players[2].roll = 0;
     pigDice.players[2].turnTally = 0;
-    $("#p2-total-score").html(pigDice.players[2].totalScore)
+    $("#p2-total-score").html(pigDice.players[2].totalScore);
     $("#p2-roll").html(pigDice.players[2].roll);
-    $("#p2-turn-tally").html(pigDice.players[2].turnTally)
-  })
+    $("#p2-turn-tally").html(pigDice.players[2].turnTally);
+  });
+  // New Game button
+  $("#new-game").on("click", function(){
+    resetAll(pigDice.players[1], 0)
+    resetAll(pigDice.players[2], 0)
+    $("#p1-total-score").html(pigDice.players[1].totalScore);
+    $("#p1-roll").html(pigDice.players[1].roll);
+    $("#p1-turn-tally").html(pigDice.players[1].turnTally);
+    $("#p2-total-score").html(pigDice.players[2].totalScore);
+    $("#p2-roll").html(pigDice.players[2].roll);
+    $("#p2-turn-tally").html(pigDice.players[2].turnTally);
+  });
 }
 
 $(document).ready(function() {
