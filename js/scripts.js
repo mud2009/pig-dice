@@ -35,7 +35,6 @@ PigDice.prototype.addTurnTallyToTotal = function(id) {
 };
 
 
-
 // Player logic
 
 function Player() {
