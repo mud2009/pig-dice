@@ -40,7 +40,7 @@ PigDice.prototype.addTurnTallyToTotal = function(id) {
 
 function resetAll(obj, val) {
   Object.keys(obj).forEach(function(index) {
-      obj[index] = val
+    obj[index] = val
   });
 }
 
