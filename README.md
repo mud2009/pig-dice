@@ -15,7 +15,7 @@
 
 ## Description
 
-Pig Dice is a program where two users can play Pig dice against each other. Players take turns to roll a single dice as many times as they wish, adding all roll results to a running total, but losing their gained score for the turn if they roll a 1.  The first player to reach 100 wins!
+Pig Dice is a program where two users can play Pig dice against each other. Players take turns to roll 2 dice as many times as they wish, adding all roll results to a running total, but losing their gained score for the turn if they roll a 1 & loosing their total score if they roll two 1's.  The first player to reach 100 wins!
 
 ## Setup/Installation Requirements
 
