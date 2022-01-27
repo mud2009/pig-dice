@@ -44,6 +44,8 @@ function resetAll(obj, val) {
   });
 }
 
+let dice = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+
 // Player logic
 
 function Player() {
@@ -69,48 +71,50 @@ function attachContactListeners() {
   //Player1
   $("#player1-roll").on("click", function() {
     pigDice.newRoll(1);
-    $("#p1-roll").html(pigDice.players[1].roll1);
-    $("#p1-roll").append(", " + pigDice.players[1].roll2);
+    $("#p1-roll").html(dice[(pigDice.players[1].roll1) - 1]);
+    $("#p1-roll").append(", " + dice[(pigDice.players[1].roll2) - 1]);
     pigDice.addRollToTurnTally(1);
     $("#p1-turn-tally").html(pigDice.players[1].turnTally);
     $("#p1-total-score").html(pigDice.players[1].totalScore);
   });
   $("#player1-hold").on("click", function(){
     pigDice.addTurnTallyToTotal(1);
-    pigDice.players[1].roll = 0;
+    pigDice.players[1].roll1 = 0;
+    pigDice.players[1].roll2 = 0;
     pigDice.players[1].turnTally = 0;
+    $("#p1-roll").html("");
+    $("#p1-turn-tally").html("")
     $("#p1-total-score").html(pigDice.players[1].totalScore)
-    $("#p1-roll").html(pigDice.players[1].roll);
-    $("#p1-turn-tally").html(pigDice.players[1].turnTally)
-  })
+    })
   //Player2
   $("#player2-roll").on("click", function() {
     pigDice.newRoll(2);
-    $("#p2-roll").html(pigDice.players[2].roll2);
-    $("#p2-roll").append(", " + pigDice.players[2].roll2);
+    $("#p2-roll").html(dice[(pigDice.players[2].roll1) - 1]);
+    $("#p2-roll").append(", " + dice[(pigDice.players[2].roll2) - 1]);
     pigDice.addRollToTurnTally(2);
     $("#p2-turn-tally").html(pigDice.players[2].turnTally);
     $("#p2-total-score").html(pigDice.players[2].totalScore);
   });
   $("#player2-hold").on("click", function(){
     pigDice.addTurnTallyToTotal(2);
-    pigDice.players[2].roll = 0;
+    pigDice.players[2].roll1 = 0;
+    pigDice.players[2].roll2 = 0;
     pigDice.players[2].turnTally = 0;
+    $("#p2-roll").html("");
+    $("#p2-turn-tally").html("");
     $("#p2-total-score").html(pigDice.players[2].totalScore);
-    $("#p2-roll").html(pigDice.players[2].roll);
-    $("#p2-turn-tally").html(pigDice.players[2].turnTally);
-  });
+    });
   // New Game button
   $("#new-game").on("click", function(){
     resetAll(pigDice.players[1], 0)
     resetAll(pigDice.players[2], 0)
-    $("#p1-total-score").html(pigDice.players[1].totalScore);
-    $("#p1-roll").html(pigDice.players[1].roll);
-    $("#p1-turn-tally").html(pigDice.players[1].turnTally);
-    $("#p2-total-score").html(pigDice.players[2].totalScore);
-    $("#p2-roll").html(pigDice.players[2].roll);
-    $("#p2-turn-tally").html(pigDice.players[2].turnTally);
-  });
+    $("#p1-roll").html("");
+    $("#p1-turn-tally").html("");
+    $("#p1-total-score").html("");
+    $("#p2-roll").html("");
+    $("#p2-turn-tally").html("");
+    $("#p2-total-score").html("");
+    });
 }
 
 $(document).ready(function() {
